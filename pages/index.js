@@ -1,11 +1,13 @@
 import Head from "next/head";
 import { useState } from "react";
-import { Inter } from "@next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [user, setUser] = useState(null);
+  const [email, setEmail] = useState("");
+
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+  };
 
   const login = () => {};
 
@@ -31,6 +33,8 @@ export default function Home() {
                 <input
                   className="focus:outline-none bg-slate-700 rounded-md p-2 mx-2 w-full"
                   type="email"
+                  value={email}
+                  onChange={handleChange}
                 />
               </div>
               <button
