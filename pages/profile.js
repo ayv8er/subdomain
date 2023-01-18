@@ -12,8 +12,8 @@ const Profile = () => {
 
   const handleLogout = () => {
     magic.user.logout().then(() => {
-      setUser({ user: null });
       router.push("/login");
+      setUser({ user: null });
     });
   };
 

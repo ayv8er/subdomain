@@ -16,7 +16,6 @@ export default function App({ Component, pageProps }) {
         });
       } else {
         setUser({ user: null });
-        router.push("/login");
       }
     });
   }, []);

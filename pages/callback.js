@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { magic } from "../lib/magic";
 import { UserContext } from "../lib/UserContext";
 import Spinner from "@/components/Spinner";
@@ -18,10 +18,11 @@ const Callback = () => {
   };
 
   const finishEmailRedirectLogin = () => {
-    if (router.query.magic_credential)
+    if (router.query.magic_credential) {
       magic.auth
         .loginWithCredential()
         .then((didToken) => authenticateWithServer(didToken));
+    }
   };
 
   const authenticateWithServer = async (didToken) => {
@@ -36,7 +37,7 @@ const Callback = () => {
     if (res.status === 200) {
       let userMetadata = await magic.user.getMetadata();
       await setUser(userMetadata);
-      Router.push("/profile");
+      router.push("/profile");
     }
   };
 

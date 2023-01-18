@@ -39,7 +39,6 @@ const Login = () => {
       if (res.status === 200) {
         const userMetadata = await magic.user.getMetadata();
         await setUser(userMetadata);
-        router.push("/profile");
       }
     } catch (error) {
       setDisabled(false);
