@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { magic } from "@/lib/magic";
 import { UserContext } from "@/lib/UserContext";
 import { useRouter } from "next/router";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const [user, setUser] = useContext(UserContext);
@@ -43,6 +44,13 @@ const Login = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    await magic.oauth.loginWithRedirect({
+      provider: "google",
+      redirectURI: new URL("/profile", window.location.origin).href,
+    });
+  };
+
   return (
     <>
       <Head>
@@ -71,11 +79,20 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-8 px-5 py-2.5"
+              className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
             >
-              Sign In
+              Submit
             </button>
           </form>
+          <button
+            onClick={handleGoogleLogin}
+            className="w-48 flex items-center bg-gray-800 border-gray-700 hover:bg-gray-700 active:bg-gray-500 border rounded-lg text-3xl mt-8 px-5 py-2.5"
+          >
+            <FcGoogle className="" />
+            <p className="px-4 mr-5 font-semibold text-xl text-white">
+              Sign In
+            </p>
+          </button>
         </div>
       </div>
     </>
