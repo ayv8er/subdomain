@@ -1,7 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { magic } from "../lib/magic";
 import { UserContext } from "@/lib/UserContext";
+import Spinner from "@/components/Spinner";
 
 const Home = () => {
   const [_, setUser] = useContext(UserContext);
@@ -18,11 +19,11 @@ const Home = () => {
         router.push("/login");
       }
     });
-  }, []);
+  }, [router, setUser]);
 
   return (
-    <div>
-      <h2>Loading...</h2>
+    <div className="flex justify-center mt-40">
+      <Spinner />
     </div>
   );
 };
