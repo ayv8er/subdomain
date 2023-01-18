@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@magic-ext/oauth": "^7.1.0",
+    "@magic-sdk/admin": "^1.8.0",
     "@next/font": "13.1.2",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
