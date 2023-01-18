@@ -28,10 +28,12 @@ const Callback = () => {
       },
     });
 
+    console.log(res);
+
     if (res.status === 200) {
       let userMetadata = await magic.user.getMetadata();
       await setUser(userMetadata);
-      Router.push("/profile");
+      router.push("/profile");
     }
   };
 

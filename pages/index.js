@@ -1,19 +1,43 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { magic } from "@/lib/magic";
+import { UserContext } from "@/lib/UserContext";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useContext(UserContext);
   const [email, setEmail] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    user?.issuer && router.push("/profile");
+  }, [router, user]);
 
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
 
-  const login = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const didToken = await magic.auth.loginWithMagicLink({ email: email });
+      const didToken = await magic.auth.loginWithMagicLink({
+        email: email,
+        redirectURI: new URL("/callback", window.location.origin).href,
+      });
+
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + didToken,
+        },
+      });
+
+      if (res.status === 200) {
+        const userMetadata = await magic.user.getMetadata();
+        await setUser(userMetadata);
+        router.push("/profile");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -28,35 +52,31 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="mt-32 flex justify-center ">
-        {!user && (
-          <div className="flex flex-col items-center w-11/12">
-            <h1 className="text-white font-bold text-3xl">
-              Wallet Not Connected
-            </h1>
-            <form
-              onSubmit={login}
-              className="flex flex-col items-center w-full"
+        <div className="flex flex-col items-center w-11/12">
+          <h1 className="text-white font-bold text-3xl">
+            Wallet Not Connected
+          </h1>
+          <form
+            onSubmit={handleLogin}
+            className="flex flex-col items-center w-full"
+          >
+            <div className="mt-6 flex flex-col items-center w-1/3">
+              <label className="pb-4 text-2xl">Electronic Mail Address:</label>
+              <input
+                className="focus:outline-none bg-slate-700 rounded-xl p-2 mx-2 w-full border-gray-900 border-4"
+                type="email"
+                value={email}
+                onChange={handleChange}
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-8 px-5 py-2.5"
             >
-              <div className="mt-6 flex flex-col items-center w-1/3">
-                <label className="pb-4 text-2xl">
-                  Electronic Mail Address:
-                </label>
-                <input
-                  className="focus:outline-none bg-slate-700 rounded-xl p-2 mx-2 w-full border-gray-900 border-4"
-                  type="email"
-                  value={email}
-                  onChange={handleChange}
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-8 px-5 py-2.5"
-              >
-                Sign In
-              </button>
-            </form>
-          </div>
-        )}
+              Sign In
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );

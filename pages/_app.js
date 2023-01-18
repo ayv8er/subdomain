@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
         setUser({ user: null });
       }
     });
-  }, [router]);
+  }, []);
 
   return (
     <UserContext.Provider value={[user, setUser]}>
