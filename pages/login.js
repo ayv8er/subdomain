@@ -13,7 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     user?.issuer && router.push("/profile");
-  }, [router, user]);
+  }, [user]);
 
   const handleChange = (e) => {
     setEmail(e.target.value);
@@ -25,7 +25,7 @@ const Login = () => {
       setDisabled(true);
       const didToken = await magic.auth.loginWithMagicLink({
         email: email,
-        redirectURI: new URL("/profile", window.location.origin).href,
+        redirectURI: new URL("/callback", window.location.origin).href,
       });
 
       const res = await fetch("/api/login", {
@@ -50,7 +50,7 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     await magic.oauth.loginWithRedirect({
       provider: "google",
-      redirectURI: new URL("/profile", window.location.origin).href,
+      redirectURI: new URL("/callback", window.location.origin).href,
     });
   };
 
