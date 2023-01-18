@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 const Login = () => {
   const [user, setUser] = useContext(UserContext);
   const [email, setEmail] = useState("");
+  const [disabled, setDisabled] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      setDisabled(true);
       const didToken = await magic.auth.loginWithMagicLink({
         email: email,
         redirectURI: new URL("/profile", window.location.origin).href,
@@ -40,6 +42,7 @@ const Login = () => {
         router.push("/profile");
       }
     } catch (error) {
+      setDisabled(false);
       console.error(error);
     }
   };
@@ -59,7 +62,7 @@ const Login = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="mt-32 flex justify-center ">
+      <div className="mt-32 flex justify-center">
         <div className="flex flex-col items-center w-11/12">
           <h1 className="text-white font-bold text-3xl">
             Wallet Not Connected
@@ -79,6 +82,7 @@ const Login = () => {
             </div>
             <button
               type="submit"
+              disabled={disabled}
               className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
             >
               Submit

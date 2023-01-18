@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { UserContext } from "../lib/UserContext";
 
 export default function App({ Component, pageProps }) {
