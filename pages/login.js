@@ -4,7 +4,7 @@ import { UserContext } from "@/lib/UserContext";
 import { useRouter } from "next/router";
 import SocialButton from "@/components/SocialButton";
 import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 
 const Login = () => {
   const [user, setUser] = useContext(UserContext);
@@ -75,13 +75,9 @@ const Login = () => {
         <SocialButton provider="google">
           <FcGoogle />
         </SocialButton>
-        <button
-          onClick={() => handleSocialLogin("apple")}
-          className="w-48 flex justify-center items-center bg-gray-800 border-gray-700 hover:bg-gray-700 active:bg-gray-500 border rounded-lg text-3xl mt-8 px-5 py-2.5"
-        >
-          <FaApple />
-          <p className="px-4 mr-5 font-semibold text-xl text-white">Sign In</p>
-        </button>
+        <SocialButton provider="github">
+          <FaGithub />
+        </SocialButton>
       </div>
     </div>
   );
