@@ -13,7 +13,7 @@ const SocialButton = ({ provider, children }) => {
   return (
     <button
       onClick={handleSocialLogin}
-      className="w-48 flex justify-center items-center bg-gray-800 border-gray-700 hover:bg-gray-700 active:bg-gray-500 border rounded-lg text-3xl mt-8 mx-4 px-5 py-2.5"
+      className="w-48 flex justify-center items-center bg-gray-800 border-gray-700 hover:bg-gray-700 active:bg-gray-500 border rounded-lg text-3xl mt-6 mx-4 px-5 py-2.5"
     >
       {children}
       <p className="px-4 mr-5 font-semibold text-xl text-white">
