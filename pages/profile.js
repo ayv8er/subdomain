@@ -15,9 +15,11 @@ const Profile = () => {
     setNewEmail(e.target.value);
   };
 
-  const handleEmailUpdate = async () => {
+  const handleEmailUpdate = async (e) => {
+    e.preventDefault();
     try {
-      await magic.user.updateEmail({ email: newEmail, showUI: true });
+      await magic.user.updateEmail({ email: newEmail });
+      console.log(newEmail);
     } catch (error) {
       console.error(error);
     }
