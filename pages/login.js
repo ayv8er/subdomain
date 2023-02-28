@@ -88,7 +88,7 @@ const Login = () => {
           className="flex flex-col items-center w-2/5 bg-slate-800 mt-0 py-6"
         >
           <div className="flex flex-col items-center w-5/6">
-            <label className="pb-4 text-2xl">Electronic Mail Login</label>
+            <label className="pb-4 text-2xl">Email Login</label>
             <input
               className="focus:outline-none bg-slate-700 rounded-md p-2 mx-2 w-full border-gray-900 border-2"
               type="email"
