@@ -133,7 +133,7 @@ const Login = () => {
           <SocialButton provider="github">
             <FaGithub />
           </SocialButton>
-          <SocialButton provider="discord">
+          <SocialButton provider="twitter">
             <FaDiscord />
           </SocialButton>
         </div>
