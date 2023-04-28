@@ -4,7 +4,7 @@ import { UserContext } from "@/lib/UserContext";
 import { useRouter } from "next/router";
 import SocialButton from "@/components/SocialButton";
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub, FaDiscord } from "react-icons/fa";
+import { FaGithub, FaDiscord, FaTwitter } from "react-icons/fa";
 
 const Login = () => {
   const [user, setUser] = useContext(UserContext);
@@ -133,8 +133,11 @@ const Login = () => {
           <SocialButton provider="github">
             <FaGithub />
           </SocialButton>
-          <SocialButton provider="twitter">
+          <SocialButton provider="discord">
             <FaDiscord />
+          </SocialButton>
+          <SocialButton provider="twitter">
+            <FaTwitter />
           </SocialButton>
         </div>
       </div>
