@@ -8,6 +8,7 @@ import { FaGithub, FaDiscord, FaTwitter } from "react-icons/fa";
 
 const Login = () => {
   const [user, setUser] = useContext(UserContext);
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [disabled, setDisabled] = useState(false);
@@ -21,6 +22,10 @@ const Login = () => {
     setEmail(e.target.value);
   };
 
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
   const handlePhoneChange = (e) => {
     setPhoneNumber(e.target.value);
   };
@@ -29,9 +34,9 @@ const Login = () => {
     e.preventDefault();
     try {
       setDisabled(true);
-      const didToken = await magic.auth.loginWithMagicLink({
+      const didToken = await magic.auth.loginWithEmailOTP({
         email: email,
-        redirectURI: new URL("/callback", window.location.origin).href,
+        // redirectURI: new URL("/callback", window.location.origin).href,
       });
 
       const res = await fetch("/api/login", {
@@ -50,6 +55,57 @@ const Login = () => {
       setDisabled(false);
       console.error(error);
     }
+  };
+
+  const handleRegisterUsername = async (event) => {
+    event.preventDefault();
+    try {
+      setDisabled(true);
+      const didToken = await magic.webauthn.registerNewUser({ username });
+
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + didToken,
+        },
+      });
+
+      if (res.status === 200) {
+        const userMetadata = await magic.webauthn.getMetadata();
+        await setUser(userMetadata);
+      }
+    } catch (e) {
+      setDisabled(false);
+      console.log(e);
+    }
+  };
+
+  const handleWebauthnLogin = async () => {
+    try {
+      setDisabled(true);
+      const didToken = await magic.webauthn.login({ username });
+
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + didToken,
+        },
+      });
+
+      if (res.status === 200) {
+        const userMetadata = await magic.webauthn.getMetadata();
+        await setUser(userMetadata);
+      }
+    } catch (e) {
+      setDisabled(false);
+      console.log(e);
+    }
+  };
+
+  const handleUILogin = async () => {
+    await magic.wallet.connectWithUI();
   };
 
   const handleSMSLogin = async (e) => {
@@ -83,6 +139,7 @@ const Login = () => {
     <div className="mt-12 flex justify-center">
       <div className="flex flex-col items-center w-11/12">
         <h1 className="text-white font-bold text-3xl mb-8">Connect Wallet</h1>
+
         <form
           onSubmit={handleEmailLogin}
           className="flex flex-col items-center w-2/5 bg-slate-800 mt-0 py-6"
@@ -96,6 +153,34 @@ const Login = () => {
               onChange={handleEmailChange}
             />
           </div>
+          <button
+            type="submit"
+            disabled={disabled}
+            className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
+          >
+            Submit
+          </button>
+        </form>
+        {/* <form
+          onSubmit={handleWebauthnLogin}
+          className="flex flex-col items-center w-2/5 bg-slate-800 mt-8 py-6"
+        >
+          <div className="flex flex-col items-center w-5/6">
+            <label className="pb-4 text-2xl">WebAuthn Login</label>
+            <input
+              className="focus:outline-none bg-slate-700 rounded-md p-2 mx-2 w-full border-gray-900 border-2"
+              type="username"
+              value={username}
+              onChange={handleUsernameChange}
+            />
+          </div>
+          <button
+            onClick={handleRegisterUsername}
+            disabled={disabled}
+            className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
+          >
+            Register
+          </button>
           <button
             type="submit"
             disabled={disabled}
@@ -125,6 +210,12 @@ const Login = () => {
             Submit
           </button>
         </form>
+        <button
+          onClick={handleUILogin}
+          className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
+        >
+          UI Login
+        </button>
         <p className="mt-8 font-semibold text-3xl">Sign in with:</p>
         <div className="flex">
           <SocialButton provider="google">
@@ -139,7 +230,7 @@ const Login = () => {
           <SocialButton provider="twitter">
             <FaTwitter />
           </SocialButton>
-        </div>
+        </div> */}
       </div>
     </div>
   );
