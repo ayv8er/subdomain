@@ -50,7 +50,6 @@ const Profile = () => {
             Email:{" "}
             <span className="ml-2 italic font-normal">{user?.email}</span>
           </p>
-          {/* <button onClick={handleUI}>Show UI</button> */}
           <p className="font-semibold text-2xl my-2">
             Wallet Address:{" "}
             <span className="ml-2 italic font-normal underline text-blue-600">
@@ -61,11 +60,17 @@ const Profile = () => {
           </p>
           <button
             className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
+            onClick={handleUI}
+          >
+            Show UI
+          </button>
+          <button
+            className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
             onClick={() => magic.user.showSettings()}
           >
             Enable MFA
           </button>
-          {/* <form
+          <form
             onSubmit={handleEmailUpdate}
             className="flex flex-col items-center w-4/5 bg-slate-800 mt-8 py-6"
           >
@@ -84,7 +89,7 @@ const Profile = () => {
                 Update Email
               </button>
             </div>
-          </form> */}
+          </form>
           <button
             className="w-40 flex justify-center bg-red-900 opacity-70 border-gray-700 text-white hover:bg-red-700 active:bg-red-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
             onClick={handleLogout}
