@@ -161,7 +161,7 @@ const Login = () => {
             Submit
           </button>
         </form>
-        {/* <form
+        <form
           onSubmit={handleWebauthnLogin}
           className="flex flex-col items-center w-2/5 bg-slate-800 mt-8 py-6"
         >
@@ -230,7 +230,7 @@ const Login = () => {
           <SocialButton provider="twitter">
             <FaTwitter />
           </SocialButton>
-        </div> */}
+        </div>
       </div>
     </div>
   );
