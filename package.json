@@ -9,21 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@magic-ext/oauth": "^7.1.0",
-    "@magic-ext/webauthn": "^12.2.1",
-    "@magic-sdk/admin": "^1.8.0",
-    "@next/font": "13.1.2",
-    "eslint": "8.32.0",
-    "eslint-config-next": "13.1.2",
-    "magic-sdk": "^18.2.1",
-    "next": "13.1.2",
+    "@magic-ext/oauth": "^13.0.0",
+    "@magic-ext/webauthn": "^13.0.0",
+    "@magic-sdk/admin": "^2.0.0",
+    "@next/font": "13.4.12",
+    "eslint": "8.46.0",
+    "eslint-config-next": "13.4.12",
+    "magic-sdk": "^19.1.0-canary.599.5720180135.0",
+    "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.7.1"
+    "react-icons": "^4.10.1"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.4"
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3"
   }
 }

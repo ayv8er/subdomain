@@ -68,8 +68,15 @@ const Profile = () => {
             className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
             onClick={() => magic.user.showSettings()}
           >
-            Enable MFA
+            Show Settings
           </button>
+          <button
+            className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
+            onClick={() => magic.user.showSettings({ page: "update-email" })}
+          >
+            Update Email
+          </button>
+
           <form
             onSubmit={handleEmailUpdate}
             className="flex flex-col items-center w-4/5 bg-slate-800 mt-8 py-6"
