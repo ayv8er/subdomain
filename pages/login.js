@@ -168,6 +168,27 @@ const Login = () => {
           Recover Account
         </button>
         <form
+          onSubmit={handleSMSLogin}
+          className="flex flex-col items-center w-2/5 bg-slate-800 mt-8 py-6"
+        >
+          <div className="flex flex-col items-center w-5/6">
+            <label className="pb-4 text-2xl">SMS Login</label>
+            <input
+              className="focus:outline-none bg-slate-700 rounded-md p-2 mx-2 w-3/4 border-gray-900 border-2"
+              type="tel"
+              value={phoneNumber}
+              onChange={handlePhoneChange}
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={disabled}
+            className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
+          >
+            Submit
+          </button>
+        </form>
+        <form
           onSubmit={handleWebauthnLogin}
           className="flex flex-col items-center w-2/5 bg-slate-800 mt-8 py-6"
         >
@@ -195,27 +216,6 @@ const Login = () => {
             Submit
           </button>
         </form>
-        <form
-          onSubmit={handleSMSLogin}
-          className="flex flex-col items-center w-2/5 bg-slate-800 mt-8 py-6"
-        >
-          <div className="flex flex-col items-center w-5/6">
-            <label className="pb-4 text-2xl">SMS Login</label>
-            <input
-              className="focus:outline-none bg-slate-700 rounded-md p-2 mx-2 w-3/4 border-gray-900 border-2"
-              type="tel"
-              value={phoneNumber}
-              onChange={handlePhoneChange}
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={disabled}
-            className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
-          >
-            Submit
-          </button>
-        </form>
         <button
           onClick={handleUILogin}
           className="w-40 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
@@ -229,7 +229,7 @@ const Login = () => {
           </SocialButton>
           <SocialButton provider="github">
             <FaGithub />
-          </SocialButton>
+          </SocialButton>``
           <SocialButton provider="discord">
             <FaDiscord />
           </SocialButton>
