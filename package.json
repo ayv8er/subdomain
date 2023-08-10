@@ -9,13 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@magic-ext/oauth": "^13.0.0",
+    "@magic-ext/oauth": "^13.1.0",
     "@magic-ext/webauthn": "^13.0.0",
     "@magic-sdk/admin": "^2.0.0",
     "@next/font": "13.4.12",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
-    "magic-sdk": "^19.1.0-canary.599.5720180135.0",
+    "magic-sdk": "^19.1.0",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
