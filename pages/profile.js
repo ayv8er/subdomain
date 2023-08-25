@@ -83,10 +83,7 @@ const Profile = () => {
             Add Recovery Number
           </button>
 
-          <form
-            onSubmit={handleEmailUpdate}
-            className="flex flex-col items-center w-4/5 bg-slate-800 mt-8 py-6"
-          >
+          <div className="flex flex-col items-center w-4/5 bg-slate-800 mt-8 py-6">
             <div className="flex flex-col items-center w-5/6">
               <input
                 className="focus:outline-none bg-slate-700 rounded-md p-2 mx-2 w-3/4 border-gray-900 border-2"
@@ -97,12 +94,26 @@ const Profile = () => {
               />
               <button
                 className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
-                type="submit"
+                onClick={handleEmailUpdate}
               >
                 Update Email
               </button>
+              <button
+                className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
+                onClick={() =>
+                  magic.auth.updateEmailWithUI({ email: newEmail })
+                }
+              >
+                Update Email With UI
+              </button>
             </div>
-          </form>
+          </div>
+          <button
+            className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
+            onClick={() => magic.user.updatePhoneNumber()}
+          >
+            Update Phone Number
+          </button>
           <button
             className="w-40 flex justify-center bg-red-900 opacity-70 border-gray-700 text-white hover:bg-red-700 active:bg-red-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
             onClick={handleLogout}
