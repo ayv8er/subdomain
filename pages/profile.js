@@ -7,12 +7,17 @@ import Spinner from "@/components/Spinner";
 const Profile = () => {
   const [user, setUser] = useContext(UserContext);
   const [newEmail, setNewEmail] = useState("");
+  const [settingsPage, setSettingsPage] = useState("");
   const router = useRouter();
 
   const etherscanLink = `https://etherscan.io/address/${user?.publicAddress}`;
 
   const handleEmailChange = (e) => {
     setNewEmail(e.target.value);
+  };
+
+  const handleSettingsPageChange = (e) => {
+    setSettingsPage(e.target.value);
   };
 
   const handleEmailUpdate = async (e) => {
@@ -22,6 +27,14 @@ const Profile = () => {
       console.log(newEmail);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleShowSettings = async () => {
+    try {
+      await magic.user.showSettings({ page: settingsPage });
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -64,12 +77,23 @@ const Profile = () => {
           >
             Show UI
           </button>
-          <button
-            className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
-            onClick={() => magic.user.showSettings()}
-          >
-            Show Settings
-          </button>
+          <div className="flex flex-col items-center w-4/5 bg-slate-800 mt-8 py-6">
+            <div className="flex flex-col items-center w-5/6">
+              <input
+                className="focus:outline-none bg-slate-700 rounded-md p-2 mx-2 w-3/4 border-gray-900 border-2"
+                type="email"
+                value={settingsPage}
+                onChange={handleSettingsPageChange}
+                placeholder="Leave blank for settings panel"
+              />
+              <button
+                className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
+                onClick={handleShowSettings}
+              >
+                Show Settings
+              </button>
+            </div>
+          </div>
           <button
             className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
             onClick={() => magic.user.showSettings({ page: "update-email" })}
