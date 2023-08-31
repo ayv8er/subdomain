@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "@/lib/UserContext";
 import { useRouter } from "next/router";
 import { magic } from "@/lib/magic";
@@ -11,6 +11,14 @@ const Profile = () => {
   const router = useRouter();
 
   const etherscanLink = `https://etherscan.io/address/${user?.publicAddress}`;
+
+  useEffect(() => {
+    magic.user.isLoggedIn().then((isLoggedIn) => {
+      if (!isLoggedIn) {
+        router.push("/login");
+      }
+    });
+  }, [user]);
 
   const alertMetadata = () => {
     alert(JSON.stringify(user, null, 2));
