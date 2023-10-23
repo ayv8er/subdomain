@@ -1,23 +1,12 @@
 import { useState, useEffect, useContext } from "react";
-// import { magic } from "@/lib/magic";
-import { Magic } from "magic-sdk";
+import { magic } from "@/lib/magic";
 import { UserContext } from "@/lib/UserContext";
 import { useRouter } from "next/router";
 import SocialButton from "@/components/SocialButton";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaDiscord, FaTwitter } from "react-icons/fa";
-import { OAuthExtension } from "@magic-ext/oauth";
-import { WebAuthnExtension } from "@magic-ext/webauthn";
-import { AuthExtension } from "@magic-ext/auth";
 
 const Login = () => {
-  const magic = new Magic("pk_live_D34413A845CE453E", {
-    extensions: [
-      new AuthExtension(),
-      new OAuthExtension(),
-      new WebAuthnExtension(),
-    ],
-  });
   const [user, setUser] = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
