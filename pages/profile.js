@@ -112,18 +112,6 @@ const Profile = () => {
               </button>
             </div>
           </div>
-          <button
-            className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
-            onClick={() => magic.user.showSettings({ page: "update-email" })}
-          >
-            Update Email
-          </button>
-          <button
-            className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
-            onClick={() => magic.user.showSettings({ page: "recovery" })}
-          >
-            Add Recovery Number
-          </button>
 
           <div className="flex flex-col items-center w-4/5 bg-slate-800 mt-8 py-6">
             <div className="flex flex-col items-center w-5/6">
@@ -150,12 +138,12 @@ const Profile = () => {
               </button>
             </div>
           </div>
-          <button
+          {/* <button
             className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
             onClick={() => magic.user.updatePhoneNumber()}
           >
             Update Phone Number
-          </button>
+          </button> */}
           <button
             className="w-40 flex justify-center bg-red-900 opacity-70 border-gray-700 text-white hover:bg-red-700 active:bg-red-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
             onClick={handleLogout}
