@@ -4,7 +4,6 @@ import { UserContext } from "@/lib/UserContext";
 import { useRouter } from "next/router";
 import SocialButton from "@/components/SocialButton";
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub, FaDiscord, FaTwitter } from "react-icons/fa";
 
 const Login = () => {
   const [user, setUser] = useContext(UserContext);

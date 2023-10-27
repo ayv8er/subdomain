@@ -2,12 +2,14 @@ import { useState, useContext, useEffect } from "react";
 import { UserContext } from "@/lib/UserContext";
 import { useRouter } from "next/router";
 import { magic } from "@/lib/magic";
+import { web3 } from "@/lib/web3";
 import Spinner from "@/components/Spinner";
 
 const Profile = () => {
   const [user, setUser] = useContext(UserContext);
   const [newEmail, setNewEmail] = useState("");
   const [settingsPage, setSettingsPage] = useState("");
+  const [message, setMessage] = useState("");
   const router = useRouter();
 
   const etherscanLink = `https://etherscan.io/address/${user?.publicAddress}`;
@@ -28,6 +30,10 @@ const Profile = () => {
     setNewEmail(e.target.value);
   };
 
+  const handleMessageChange = (e) => {
+    setMessage(e.target.value);
+  }
+
   const handleSettingsPageChange = (e) => {
     setSettingsPage(e.target.value);
   };
@@ -47,6 +53,15 @@ const Profile = () => {
       await magic.user.showSettings({ page: settingsPage });
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  const handleSignMessage = async () => {
+    try {
+      const signedMessage = await web3.eth.personal.sign(message, user.publicAddress);
+      console.log(signedMessage);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -95,6 +110,25 @@ const Profile = () => {
           >
             Show UI
           </button>
+
+          <div className="flex flex-col items-center w-4/5 bg-slate-800 mt-8 py-6">
+            <div className="flex flex-col items-center w-5/6">
+              <input
+                className="focus:outline-none bg-slate-700 rounded-md p-2 mx-2 w-3/4 border-gray-900 border-2"
+                type="text"
+                value={message}
+                onChange={handleMessageChange}
+                placeholder="Sign Message Value"
+              />
+              <button
+                className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
+                onClick={handleSignMessage}
+              >
+                Sign Message
+              </button>
+            </div>
+          </div>
+
           <div className="flex flex-col items-center w-4/5 bg-slate-800 mt-8 py-6">
             <div className="flex flex-col items-center w-5/6">
               <input
@@ -138,12 +172,6 @@ const Profile = () => {
               </button>
             </div>
           </div>
-          {/* <button
-            className="w-48 flex justify-center bg-gray-800 border-gray-700 text-white hover:bg-gray-700 active:bg-gray-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
-            onClick={() => magic.user.updatePhoneNumber()}
-          >
-            Update Phone Number
-          </button> */}
           <button
             className="w-40 flex justify-center bg-red-900 opacity-70 border-gray-700 text-white hover:bg-red-700 active:bg-red-500 border rounded-lg font-semibold text-xl mt-6 px-5 py-2.5"
             onClick={handleLogout}
